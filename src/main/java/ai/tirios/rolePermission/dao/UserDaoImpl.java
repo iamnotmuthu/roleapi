@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao{
 	public Auth getUserAuth(int userId) {
 		System.out.println(jdbcTemplate);
 		SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("userId", userId);
-		String query = "select ur.id, u.user_id, ur.role_id,p.*\r\n" + 
+		String query = "select ur.id, u.user_id, ur.role_id,ur.role_name,p.*\r\n" + 
 				"from user_role ur, service_user u, role_permission rp, permission p where ur.role_id=rp.role_id and ur.user_id=u.user_id and rp.PERMISSION_ID=p.permission_id\r\n" + 
 				"and u.user_id=:userId";
 		Auth result = (Auth) jdbcTemplate.query(query, namedParameters,new Extractor());
